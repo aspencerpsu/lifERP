@@ -17,7 +17,7 @@ The following problems ** cannot ** be solved with this gui:
  10. Metaheuristic lp
  11. Second Order Cone lp
 
-If you're an undergraduate or graduate student, please do not use this for homework or fast solutions to group projects. This is created **only** for professionals and business professionals in need. If otherwise suggested you need the package, contact aspencerpsu@gmail.com or create an issue and I'd be glad troubleshoot or give assistance with installation and packaging.
+If you're an undergraduate or graduate student, please do not use this for homework or fast solutions to group projects. This is created **only** for professionals and business professionals in need of solver to handle roughcut estimates of decisions, however the user is limited to 200 variables. If otherwise suggested of needing a different package to interact with the solver, contact aspencerpsu@gmail.com or create an issue and I'd be glad troubleshoot or give assistance with installation and packaging.
 
 ## ** Installation: **
 #### <tb><tb>  For Linux/Ubuntu:
@@ -44,7 +44,7 @@ If you're an undergraduate or graduate student, please do not use this for homew
 
 All packages can be installed with the `sudo apt-get install` command. To use .NET on ubuntu you need to install Mono. To get the .gz/tar archive directory, download the package using [this link][1] and then run `sudo make Makefile` or use the g++ compiler on the Makefile issuing `sudo gcc Makefile` within the root of the project directory . To setup using the python package run `python.exe setup.py install --user` under the ortools_examples directory. To check whether the or-tools python package has all the needed dependencies, hit python check_python_deps.py.
 
-Once the tools have been compiled and routed to the respective folders(s). you **must** delete the pywrap.lp and replace it with this [raw file][2] slightly modified for the tkinter gui automation and replace where the setup configured the module directory. (Again replace the pathfile with the modified pywrap.py file). 
+Once the tools have been compiled and routed to the respective folders(s). you **must** delete the pywraplp.py file and replace it with this [raw file][2] slightly modified for the tkinter gui automation and replace where the setup configured the module directory. (Again replace the pathfile with the modified pywrap.py file). 
 
 For other Linux distro's visit [google optimization tools][3].
 
@@ -61,18 +61,18 @@ For other Linux distro's visit [google optimization tools][3].
 
 <br>
 <br>
-Once you have the or tools created and swapped the pywraplp file for the modified version, you can download and compile the Tkinter module by `sudo apt-get install` for linux or use `homebrew` for mac os x.
+Once you have the ortools created and swapped the pywraplp file for the modified version, you can download and compile the Tkinter module by `sudo apt-get install` for linux or use `homebrew` for mac os x.
 
 Once the packages have been downloaded and configured successfully, run `python visual_example.py` to start the simplex gui.
 
-The tkinter module will prompt you to input the decision variables fields and constraints. Be forwarned, there are **no** substractions to be added in the system of equations, only a sum *e.g.*:
+The tkinter module will prompt you to input the decision variables fields and input the constraint within each field. Be forwarned, there are **no** substractions to be added in the system of equations, only a sum *e.g.*:
 <br>
 <br>
 ![simplex example][4]
 <br>
 <br>
 
-For more help on using the simplex gui, contact aspencerpsu@gmail.com or write an issue for debugging issues.
+For more help on using the simplex gui, contact aspencerpsu@gmail.com or write an issue for debugging. You'll get a response within the terminal window if the response indicates the solution is infeasible or non-optimal. Does not support entering variable and ratio test algorithms.
 
 Use the code wisely.
 
