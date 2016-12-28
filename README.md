@@ -19,8 +19,8 @@ The following problems ** cannot ** be solved with this gui:
 
 If you're an undergraduate or graduate student, please do not use this for homework or fast solutions to group projects. This is created **only** for professionals and business professionals in need of solver to handle roughcut estimates of decisions, however the user is limited to 200 variables. If otherwise suggested of needing a different package to interact with the solver, contact aspencerpsu@gmail.com or create an issue and I'd be glad troubleshoot or give assistance with installation and packaging.
 
-## ** Installation: **
-#### <tb><tb>  For Linux/Ubuntu:
+ ** ## Installation: **
+ <tb><tb>  #### For Linux/Ubuntu:
 
      The following packages are needed:
            1. tkinter
@@ -74,7 +74,12 @@ The tkinter module will prompt you to input the decision variables fields and in
 
 For more help on using the simplex gui, contact aspencerpsu@gmail.com or write an issue for debugging. You'll get a response within the terminal window if the response indicates the solution is infeasible or non-optimal. Does not support entering variable and ratio test algorithms.
 
-Use the code wisely.
+**If The Solution is not feasible....**
+
+If the solution is not feasible **&** the objective row is a maximization problem definition expression, you have to convert the matrix into a BFS with slack variables directly inside each row. I.E. a collective set of non basic variables and basic variables: {x1, x2, x3...} BVs, {s1, s2, s3} NBV's. Once you have the constraint entry filled, you can ** * ONLY * ** use the `>=` operator for the item to work correctly.
+
+
+Use the code wisely and happy sharing!
 
     
 
