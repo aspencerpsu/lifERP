@@ -78,6 +78,7 @@ For more help on using the simplex gui, contact aspencerpsu@gmail.com or write a
 
 If the solution is not feasible **&** the objective row is a maximization problem definition expression, you have to convert the matrix into a BFS with slack variables directly inside each row. I.E. a collective set of non basic variables and basic variables: {x1, x2, x3...} BVs, {s1, s2, s3} NBV's. Once you have the constraint entry filled, you can ** * ONLY * ** use the `>=` operator for the item to work correctly.
 
+![slack inputs][5]
 
 Use the code wisely and happy sharing!
 
@@ -88,3 +89,4 @@ Use the code wisely and happy sharing!
   [2]: https://raw.githubusercontent.com/aspencerpsu/Tkinter/master/pywraplp.py
   [3]: https://developers.google.com/optimization/installing#installing-from-source-on-windows
   [4]: https://raw.githubusercontent.com/aspencerpsu/Tkinter/master/simplex_gui.JPG
+  [5]: https://raw.githubusercontent.com/aspencerpsu/Tkinter/master/slack_input.JPG
