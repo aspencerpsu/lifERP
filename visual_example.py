@@ -26,7 +26,8 @@ def configuregui():
 
 	guiapp.canvas.create_window(1, 1, anchor=NE, window=guiapp.frame)
 	guiapp.frame.update_idletasks()
-	guiapp.canvas.config(scrollregion=guiapp.canvas.bbox("all"), xscrollcommand=guiapp.hscrollbar.set, yscrollcommand=guiapp.vscrollbar.set)
+	guiapp.canvas.config(scrollregion=guiapp.canvas.bbox("all"), 
+		xscrollcommand=guiapp.hscrollbar.set, yscrollcommand=guiapp.vscrollbar.set)
 	guiapp.vscrollbar.config(command=guiapp.canvas.yview)
 	guiapp.hscrollbar.config(command=guiapp.canvas.xview)
 
@@ -51,7 +52,8 @@ def additionalVarCap(**kwargs):
 	else:
 		instancerow = int(guiapp.infVarDir[kwargs['instance']]['self'].grid_info()['row'])
 		guiapp.infVarDir[kwargs['instance']]['label'] = Label(guiapp.frame, text="cap?")
-		guiapp.infVarDir[kwargs['instance']]['cap'][0] = Entry(guiapp.frame, textvariable=kwargs['capvar'])
+		guiapp.infVarDir[kwargs['instance']]['cap'][0] = Entry(guiapp.frame, 
+									textvariable=kwargs['capvar'])
 
 		#bind them A.K.A. hand the daughter's off to the groom for marriage
 
@@ -111,7 +113,8 @@ class GUIAPPLICATION(Frame):
 		self.master = master # Master Widget
 		verticalscrollbar = AutoScrollbar(self.master, orient=VERTICAL)
 		horizontalscrollbar = AutoScrollbar(self.master, orient=HORIZONTAL)
-		canvas = Canvas(self.master, yscrollcommand=verticalscrollbar.set, xscrollcommand=horizontalscrollbar.set, width=400, height=3000)
+		canvas = Canvas(self.master, yscrollcommand=verticalscrollbar.set, 
+			xscrollcommand=horizontalscrollbar.set, width=400, height=3000)
 
 		#### Frame ####
 		self.frame = Frame(canvas, height=8000, width=400)
@@ -128,7 +131,14 @@ class GUIAPPLICATION(Frame):
 		##########################################
 
 
-		self.label = Label(self.frame, width=int(.50*master.winfo_width()), height=int(.50*master.winfo_height()),text="Simplex Linear Solving Entry",font=('Arial', 24, 'underline'),fg="#ffffff", bg='#0A2933').grid(row=1,sticky=N+S+E+W,columnspan=5,padx=30)
+		self.label = Label(self.frame, 
+					width=int(.50*master.winfo_width()), 
+					height=int(.50*master.winfo_height()),
+					text="Simplex Linear Solving Entry",
+					font=('Arial', 24, 'underline'),fg="#ffffff", bg='#0A2933').grid(row=1,
+													sticky=N+S+E+W,
+													columnspan=5,
+													padx=30)
 		self.createLabel("delete all variables?")
 		self.createReset()
 		self.problemdescription = {'label': ''}
@@ -148,14 +158,25 @@ class GUIAPPLICATION(Frame):
 		self.master.grid_columnconfigure(0, weight=1)
 	
 	def createLabel(self, label):
-		Label(self.frame, text=label, width=int(.50*self.frame.winfo_width()), height=int(.50*self.frame.winfo_height())).grid(row=2, column=1, sticky=E)
+		Label(self.frame, 
+			text=label, 
+			width=int(.50*self.frame.winfo_width()), 
+			height=int(.50*self.frame.winfo_height())).grid(row=2, column=1, sticky=E)
 
 	def createReset(self):
-		Button(self.frame, text='Reset?', command=(lambda x=None: resetfunction()), bg="#D11C24", fg="#ffffff", padx=10, pady=10).grid(row=2, column=2, sticky=E)
+		Button(self.frame, 
+			text='Reset?', 
+			command=(lambda x=None: resetfunction()), 
+			bg="#D11C24", 
+			fg="#ffffff", 
+			padx=10, 
+			pady=10).grid(row=2, column=2, sticky=E)
 
 	
 	def problemLabel(self):
-		Label(self.frame, text="Report Problem Statement", pady=20).grid(row=3, column=0)
+		Label(self.frame, 
+			text="Report Problem Statement", 
+			pady=20).grid(row=3, column=0)
 		getentry = StringVar()
 		Entry(self.frame, textvariable=getentry).grid(row=3, column=1)
 		self.problemdescription['label'] = getentry.get()
@@ -168,30 +189,53 @@ class GUIAPPLICATION(Frame):
 		Entry(self.frame, textvariable=getvar).grid(row=row, column=1)
 
 		self.checkbox = Checkbutton(self.frame, text="infinite variable?")
-		self.infVarDir[id(self.checkbox)] = {'var': IntVar(), 'self': self.checkbox, 'entry': getvar}
+		self.infVarDir[id(self.checkbox)] = {'var': IntVar(), 
+							'self': self.checkbox, 
+							'entry': getvar}
 		self.checkbox.grid(row=row, column=2)
 		
 		self.infVarDir[id(self.checkbox)]['label'] = Label(self.frame, text="cap?")	
 		getentry = IntVar()
-		self.infVarDir[id(self.checkbox)]['cap'] = [Entry(self.frame, textvariable=getentry), getentry]
+		self.infVarDir[id(self.checkbox)]['cap'] =\
+			[Entry(self.frame, textvariable=getentry), getentry]
 
 		self.infVarDir[id(self.checkbox)]['label'].grid(row=row, column=3)
 		self.infVarDir[id(self.checkbox)]['cap'][0].grid(row=row, column=4)
-		self.infVarDir[id(self.checkbox)]['self'].config(variable= self.infVarDir[id(self.checkbox)]['var'], command=(lambda instance=id(self.checkbox), state=self.infVarDir[id(self.checkbox)]['var']: additionalVarCap(instance=instance, state=state, capvar=getentry) ) )
+		self.infVarDir[id(self.checkbox)]['self'].config(variable=self.infVarDir[id(self.checkbox)]['var'], 
+									command=(lambda instance=id(self.checkbox), 
+											state=self.infVarDir[id(self.checkbox)]['var']: 
+												additionalVarCap(instance=instance, state=state, capvar=getentry) ) )
 
 
 		self.infVarDir['decisionvars'] += 2 #remember the row for variables of user additions for later use...
 
 		self.labeladd = Label(self.frame, text="Add More Decisions?")		
 		self.infVarDir[id(self.checkbox)]['labeladd'] = self.labeladd
-		self.infVarDir[id(self.checkbox)]['labeladd'].grid(row=row+1, padx=15, column=0, ipadx=5)
+		self.infVarDir[id(self.checkbox)]['labeladd'].grid(row=row+1, 
+									padx=15, 
+									column=0, 
+									ipadx=5)
 
-		self.button = Button(self.frame, text="Yes", bg="#738A05", fg="#ffffff", relief="raised", command=(lambda newrow=self.infVarDir['decisionvars'], id=id(self.checkbox): additionalDecisionVar(newrow=newrow, id=id)))
+		self.button = Button(self.frame, 
+					text="Yes", 
+					bg="#738A05", 
+					fg="#ffffff", 
+					relief="raised", 
+					command=(lambda newrow=self.infVarDir['decisionvars'], id=id(self.checkbox): additionalDecisionVar(newrow=newrow, id=id)))
+
 		self.infVarDir[id(self.checkbox)]['buttonadd'] = self.button
 		self.infVarDir[id(self.checkbox)]['buttonadd'].grid(row=row+1, column=1, sticky=N+S+E+W, pady=25)
-		self.buttonno = Button(self.frame, text="No", bg="#D11C24", fg="#ffffff", relief="raised", command=(lambda row=self.infVarDir['decisionvars']+1, id=id(self.checkbox): nodecisionvars(row=row, id=id)))
+		self.buttonno = Button(self.frame, 
+					text="No", 
+					bg="#D11C24", 
+					fg="#ffffff", 
+					relief="raised", 
+					command=(lambda row=self.infVarDir['decisionvars']+1, id=id(self.checkbox): nodecisionvars(row=row, id=id)))
 		self.infVarDir[id(self.checkbox)]['buttonno'] = self.buttonno
-		self.infVarDir[id(self.checkbox)]['buttonno'].grid(row=row+1, column=2, sticky=N+S+E+W, pady=25)
+		self.infVarDir[id(self.checkbox)]['buttonno'].grid(row=row+1, 
+									column=2, 
+									sticky=N+S+E+W, 
+									pady=25)
 
 
 	def constraintbatch(self,row, constraint=None):
@@ -200,9 +244,14 @@ class GUIAPPLICATION(Frame):
 
 
 		if not self.constraintloop.has_key('title'):
-			self.constrainttitle = Label(self.frame, text="Constraints", font=('Arial', 24, 'underline'))
+			self.constrainttitle = Label(self.frame, 
+							text="Constraints", 
+							font=('Arial', 24, 'underline'))
 			self.constraintloop["title"] = self.constrainttitle
-			self.constrainttitle.grid(row=self.infVarDir['decisionvars'] + 1, column=0, columnspan=5, sticky=N+E+W+S)
+			self.constrainttitle.grid(row=self.infVarDir['decisionvars'] + 1, 
+							column=0, 
+							columnspan=5, 
+							sticky=N+E+W+S)
 
 		#constraint label
 		self.constraintlabel = Label(self.frame, text="%s:"%(constraint))
@@ -218,18 +267,25 @@ class GUIAPPLICATION(Frame):
 		#constraint operator
 		getoperator = StringVar()
 		self.constraintoperator = Entry(self.frame, textvariable=getoperator, width=5)
-		self.constraintloop[id(self.constraintlabel)]['operator'] = [self.constraintoperator, getoperator]
+
+		self.constraintloop[id(self.constraintlabel)]['operator'] \
+					= [self.constraintoperator, getoperator]
+		
 		self.constraintoperator.grid(row=row+2, column=2, padx=30, sticky=W)
 
 		
 		self.constraintlabelop = Label(self.frame, text="or symbol")
-		self.constraintloop[id(self.constraintlabel)]['labelop'] = self.constraintlabelop
+		self.constraintloop[id(self.constraintlabel)]['labelop']\
+					= self.constraintlabelop
+
 		self.constraintlabelop.grid(row=row+2, column=2, ipady=4, sticky=N)
 
 		#constraint boundary
 		getboundary = StringVar()
 		self.constraintboundary = Entry(self.frame, textvariable=getboundary, width=5)
-		self.constraintloop[id(self.constraintlabel)]['constraintbound'] = [self.constraintboundary, getboundary]
+		self.constraintloop[id(self.constraintlabel)]['constraintbound'] =\
+							[self.constraintboundary, getboundary]
+
 		self.constraintboundary.grid(row=row+2, column=3, padx=2, sticky=W)
 		
 		self.constraintlabelbo = Label(self.frame, text="boundary alloc?")
@@ -237,59 +293,114 @@ class GUIAPPLICATION(Frame):
 		self.constraintlabelbo.grid(row=row+2, column=3, ipady=4, sticky=N)
 
 		#constraint addition:
-		self.constraintlabelbu = Label(self.frame, text="Add A Constraint? Constraint Name:")
+		self.constraintlabelbu = Label(self.frame, 
+						text="Add A Constraint? Constraint Name:")
+
 		self.constraintloop[id(self.constraintlabel)]['labeladd'] = self.constraintlabelbu
 		self.constraintlabelbu.grid(row=row+3, column=0, columnspan=2, ipady=2, sticky=N)
 		
 		getconstraint = StringVar()
 		self.constraintaddentry = Entry(self.frame, textvariable=getconstraint)
-		self.constraintloop[id(self.constraintlabel)]['entryadd'] = [self.constraintaddentry, getconstraint]
+		self.constraintloop[id(self.constraintlabel)]['entryadd'] =\
+								[self.constraintaddentry, getconstraint]
+
 		self.constraintaddentry.grid(row=row+3, column=2, ipady=2, sticky=E)
 
-		self.button = Button(self.frame, bg="#738A05", fg="#ffffff", text="yes", command=(lambda id=id(self.constraintlabel),instance=self.constraintloop[id(self.constraintlabel)], row=row+3, constraint=getconstraint: addandremove(instance=instance, row=row, id=id, constraint=constraint)))
+		self.button = Button(self.frame, 
+					bg="#738A05", 
+					fg="#ffffff", 
+					text="yes", 
+					command=(lambda id=id(self.constraintlabel),
+							instance=self.constraintloop[id(self.constraintlabel)], 
+							row=row+3,
+							constraint=getconstraint: 
+								addandremove(instance=instance, row=row, id=id, constraint=constraint)))
 		self.constraintloop[id(self.constraintlabel)]['buttonadd'] = self.button
 		self.button.grid(row=row+3, column=3)
 
-		self.buttonno = Button(self.frame, bg="#D11C24", fg="#ffffff", text="no", command=(lambda row=row+3, id=id(self.constraintlabel): constraintend(row=row,id=id)))
+		self.buttonno = Button(self.frame, 
+					bg="#D11C24", 
+					fg="#ffffff",
+					text="no", 
+					command=(lambda row=row+3, 
+							id=id(self.constraintlabel): 
+								constraintend(row=row,id=id)))
+
 		self.constraintloop[id(self.constraintlabel)]['buttonno'] = self.buttonno
 		self.buttonno.grid(row=row+3, column=4)
 
 	def objectivefunction(self, row):
 		if not self.objectiveblock.has_key('title'):
-			self.objectivetitle = Label(self.frame, text="Objective Statement", font=('Arial', 24, 'underline'), )
+			self.objectivetitle = Label(self.frame, 
+							text="Objective Statement", 
+							font=('Arial', 24, 'underline'))
+
 			self.objectiveblock['title'] = self.objectivetitle
 			self.objectivetitle.grid(row=row, columnspan=5, column=0, sticky=N+W+S+E)
 
-		self.label = Label(self.frame, text="Objective Goal Algorithm:", font=('Arial', 14))
+		self.label = Label(self.frame, 
+					text="Objective Goal Algorithm:", 
+					font=('Arial', 14))
+
 		self.objectiveblock[id(self.label)] = self.label
 		self.label.grid(row=row+1, column=0, columnspan=2, sticky=E)
 		
 		getentry = StringVar()
 		v = StringVar()
 		self.entry = Entry(self.frame, textvariable=getentry)
-		self.objectiveblock[id(self.entry)] = {'entry': [self.entry, getentry], 'type': v}
-		self.objectiveblock[id(self.entry)]['entry'][0].grid(row=row+1, column=2, columnspan=3, sticky=W)
+		self.objectiveblock[id(self.entry)] = \
+							{'entry': [self.entry, getentry], 'type': v}
 
-		Radiobutton(self.frame, text='Max', variable=v, value='max',anchor=N).grid(row=row+1, column=3, sticky=W)
-		Radiobutton(self.frame, text='Min', variable=v, value='min',anchor=N).grid(row=row+1, column=4, sticky=W)
+		self.objectiveblock[id(self.entry)]['entry'][0].grid(row=row+1, 
+									column=2, 
+									columnspan=3, 
+									sticky=W)
+
+		Radiobutton(self.frame, 
+				text='Max', 
+				variable=v, 
+				value='max',
+				anchor=N).grid(row=row+1, column=3, sticky=W)
+
+		Radiobutton(self.frame, 
+				text='Min', 
+				variable=v, 
+				value='min',
+				anchor=N).grid(row=row+1, column=4, sticky=W)
 
 
-		self.submitbutton = Button(self.frame, text="Submit", fg="#ffffff", bg="#D11C24", command=(lambda row=row+4: self.solve(row)))
+		self.submitbutton = Button(self.frame, 
+						text="Submit", 
+						fg="#ffffff", 
+						bg="#D11C24", 
+						command=(lambda row=row+4: self.solve(row)))
+
 		self.submitbutton.grid(row=row+1, column=5, columnspan=2, sticky=E+W+S+N)
 
 	def solve(self, row):
 		configuregui() # PATCH
 		def orsolver():
-			varentries = [(self.infVarDir[x]['entry'].get(), self.infVarDir[x]['cap'][1].get()) for x in self.infVarDir if x != 'decisionvars']
-			print varentries
-			varconstraints = [{'label': self.constraintloop[x]['label'].cget('text'), 'boundary': self.constraintloop[x]['constraintbound'][1].get(), 'op': self.constraintloop[x]['operator'][1].get(), 'entry': self.constraintloop[x]['entry'].get()} for x in self.constraintloop if x != 'title']
+			varentries = [(self.infVarDir[x]['entry'].get(), 
+					self.infVarDir[x]['cap'][1].get()) for x in self.infVarDir if x != 'decisionvars']
+
+			varconstraints = [{'label': self.constraintloop[x]['label'].cget('text'), 
+						'boundary': self.constraintloop[x]['constraintbound'][1].get(), 
+						'op': self.constraintloop[x]['operator'][1].get(), 
+						'entry': self.constraintloop[x]['entry'].get()} for x in self.constraintloop if x != 'title']
 			objective = self.objectiveblock.values()[1]
-			createsimplex = simplex_class.ProblemStatement(constraints=varconstraints, objective=objective['entry'][1].get(), type=objective['type'].get(), variables=varentries)
-
-
+			createsimplex = simplex_class.ProblemStatement(constraints=varconstraints, 
+									objective=objective['entry'][1].get(), 
+									type=objective['type'].get(), 
+									variables=varentries)
 
 		self.frame_2 = Frame(self.frame)
-		self.button = Button(self.frame_2, font=('Arial', 14, 'underline'), text="Solve?", fg="#ffffff", bg="#0A2933", command=(lambda x=None: orsolver()))
+		self.button = Button(self.frame_2, 
+					font=('Arial', 14, 'underline'), 
+					text="Solve?", 
+					fg="#ffffff", 
+					bg="#0A2933", 
+					command=(lambda x=None: orsolver()))
+
 		self.frame_2.config(bd=5)
 		self.frame_2.grid(row=row, column=2, columnspan=5, rowspan=3, sticky=N+W+E+S)
 		self.button.grid(row=0, column=0, sticky=N+W+E+S) 
