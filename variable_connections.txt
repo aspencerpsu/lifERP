@@ -1,0 +1,79 @@
+
+Number of variables = 10
+
+Number of constraints = 4
+
+solve output = 0
+Problem solved in 16.000000 ms 
+
+Optimal objective value = 11400.000000 
+
+s3 = 400.000000
+
+Plant_3 = 400.000000
+
+Plant_2 = 0.000000
+
+Plant_4 = 200.000000
+
+s4 = 0.000000
+
+a1 = 0.000000
+
+Plant_1 = 0.000000
+
+a2 = 0.000000
+
+e1 = 0.000000
+
+e2 = 0.000000
+
+ 
+Advanced Usage: 
+
+ 
+Problem Solved in 3 iterations
+ 
+s3: reduced cost = 0.000000
+ 
+Plant_3: reduced cost = 0.000000
+ 
+Plant_2: reduced cost = 0.500000
+ 
+Plant_4: reduced cost = 0.000000
+ 
+s4: reduced cost = 10000.000000
+ 
+a1: reduced cost = 0.000000
+ 
+Plant_1: reduced cost = 0.000000
+ 
+a2: reduced cost = 0.000000
+ 
+e1: reduced cost = 0.000000
+ 
+e2: reduced cost = 0.000000
+
+ constraint Raw Material Production: dual value = -1.500000
+ activity=4000.000000
+ 
+ constraint Raw Material Production Lower to Upper Boundary:
+ 	  -inf < 3999 < 4000.000000
+
+ constraint init: dual value = 16.000000
+ activity=1000.000000
+ 
+ constraint init Lower to Upper Boundary:
+ 	  1000.000000 < 1000 < inf
+
+ constraint Plant_3 Baseline Prod.: dual value = 3.500000
+ activity=400.000000
+ 
+ constraint Plant_3 Baseline Prod. Lower to Upper Boundary:
+ 	  400.000000 < 400 < inf
+
+ constraint Labor: dual value = 0.000000
+ activity=3000.000000
+ 
+ constraint Labor Lower to Upper Boundary:
+ 	  -inf < 3000 < 3300.000000
