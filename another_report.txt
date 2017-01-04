@@ -1,0 +1,67 @@
+
+Number of variables = 10
+
+Number of constraints = 4
+
+solve output = 0
+Problem solved in 13.000000 ms 
+
+Optimal objective value = 5983.333333 
+
+plant_1 = 400.000000
+
+plant_3 = 0.000000
+
+plant_2 = 16.666667
+
+plant_4 = 533.333333
+
+s4 = 0.000000
+
+a1 = 0.000000
+
+s3 = 0.000000
+
+a2 = 0.000000
+
+s1 = 0.000000
+
+e2 = 0.000000
+
+ 
+Advanced Usage: 
+
+ 
+Problem Solved in 2 iterations
+ 
+plant_1: reduced cost = -0.000000
+ 
+plant_3: reduced cost = -0.666667
+ 
+plant_2: reduced cost = -0.000000
+ 
+plant_4: reduced cost = 0.000000
+ 
+s4: reduced cost = -5.666667
+ 
+a1: reduced cost = 0.000000
+ 
+s3: reduced cost = 0.000000
+ 
+a2: reduced cost = 0.000000
+ 
+s1: reduced cost = 0.000000
+ 
+e2: reduced cost = 0.000000
+
+ constraint 0: dual value = -0.000000
+ activity=4483.333333
+
+ constraint 1: dual value = 5.666667
+ activity=950.000000
+
+ constraint 2: dual value = -2.333333
+ activity=400.000000
+
+ constraint 3: dual value = 0.333333
+ activity=4600.000000
