@@ -17,6 +17,7 @@ def resetfunction():
 	
 	reload(simplex_class)
 	root = Tk()
+	root.geometry("600x600+20+10")
 	guiapp = GUIAPPLICATION(root)
 	guiapp.mainloop()
 
