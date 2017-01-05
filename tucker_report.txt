@@ -1,10 +1,10 @@
 
-Number of variables = 10
+Number of variables = 9
 
 Number of constraints = 4
 
 solve output = 0
-Problem solved in 13.000000 ms 
+Problem solved in 20.000000 ms 
 
 Optimal objective value = 5983.333333 
 
@@ -24,8 +24,6 @@ s3 = 0.000000
 
 a2 = 0.000000
 
-s1 = 0.000000
-
 e2 = 0.000000
 
  
@@ -42,7 +40,7 @@ plant_2: reduced cost = -0.000000
  
 plant_4: reduced cost = 0.000000
  
-s4: reduced cost = -5.666667
+s4: reduced cost = -10000.000000
  
 a1: reduced cost = 0.000000
  
@@ -50,18 +48,28 @@ s3: reduced cost = 0.000000
  
 a2: reduced cost = 0.000000
  
-s1: reduced cost = 0.000000
- 
 e2: reduced cost = 0.000000
 
- constraint 0: dual value = -0.000000
+ constraint raw material cost: dual value = -0.000000
  activity=4483.333333
+ 
+ constraint raw material cost Lower to Upper Boundary:
+ 	  -inf < 4483 < 5000.000000
 
- constraint 1: dual value = 5.666667
+ constraint init: dual value = 5.666667
  activity=950.000000
+ 
+ constraint init Lower to Upper Boundary:
+ 	  950.000000 < 950 < 950.000000
 
- constraint 2: dual value = -2.333333
- activity=400.000000
-
- constraint 3: dual value = 0.333333
+ constraint labor costs: dual value = 0.333333
  activity=4600.000000
+ 
+ constraint labor costs Lower to Upper Boundary:
+ 	  -inf < 4600 < 4600.000000
+
+ constraint plant_4 min production: dual value = -2.333333
+ activity=400.000000
+ 
+ constraint plant_4 min production Lower to Upper Boundary:
+ 	  400.000000 < 400 < inf
