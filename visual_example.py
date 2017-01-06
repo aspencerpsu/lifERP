@@ -11,7 +11,6 @@ def resetfunction():
 	global guiapp, root
 	"""The resetfunction deletes all the String, Int, and Boolean Vars for 
 	    linear package"""
-	print "Working..."
 	root.destroy()
 	del guiapp
 	
@@ -43,7 +42,6 @@ def orsolver():
 
 	for x in guiapp.infVarDir:
 		try:
-			print guiapp.infVarDir[x]
 			if x != 'decisionvars' and 'labels':
 				varentries.append((guiapp.infVarDir[x]['entry'].get(), 
 						   guiapp.infVarDir[x]['bounds'][1].get(),
@@ -65,7 +63,7 @@ def orsolver():
 	createsimplex = simplex_class.ProblemStatement(constraints=varconstraints, 
 							objective=objective['entry'][1].get(), 
 							type=objective['type'].get(), 
-							name = guiapp.problemdescription['label'],
+							name = guiapp.problemdescription['label'].get(),
 							variables=varentries)
 
 def additionalVarCap(**kwargs):
@@ -103,8 +101,6 @@ def additionalVarCap(**kwargs):
 									)
 		guiapp.infVarDir[kwargs['instance']]['bounds'].append(kwargs['floorvar'])
         
-		print guiapp.infVarDir[kwargs['instance']]['bounds']
-
 		#bind them A.K.A. hand the daughter's off to the groom for marriage
 
 		guiapp.infVarDir[kwargs['instance']]['labels'][0].grid(row=instancerow, column=3)
@@ -165,8 +161,11 @@ class GUIAPPLICATION(Frame):
 		self.master = master # Master Widget
 		verticalscrollbar = AutoScrollbar(self.master, orient=VERTICAL)
 		horizontalscrollbar = AutoScrollbar(self.master, orient=HORIZONTAL)
-		canvas = Canvas(self.master, yscrollcommand=verticalscrollbar.set, 
-			xscrollcommand=horizontalscrollbar.set, width=400, height=3000)
+		canvas = Canvas(self.master, 
+				yscrollcommand=verticalscrollbar.set, 
+			      	xscrollcommand=horizontalscrollbar.set, 
+				width=400, 
+				height=3000)
 
 		#### Frame ####
 		self.frame = Frame(canvas, height=8000, width=400)
@@ -187,13 +186,15 @@ class GUIAPPLICATION(Frame):
 					width=int(.50*master.winfo_width()), 
 					height=int(.50*master.winfo_height()),
 					text="Simplex Linear Solving Entry",
-					font=('Arial', 24, 'underline'),fg="#ffffff", bg='#0A2933').grid(row=1,
-													sticky=N+S+E+W,
-													columnspan=5,
-													padx=30)
+					font=('Arial', 24, 'underline'),
+					fg="#ffffff", 
+					bg='#0A2933').grid(row=1,
+							   sticky=N+S+E+W,
+							   columnspan=5,
+							   padx=30)
 		self.createLabel("delete all variables?")
 		self.createReset()
-		self.problemdescription = {'label': ''}
+		self.problemdescription = {}
 		self.problemLabel()
 		self.infVarDir = {'decisionvars':3} #house the decisions
 		self.decisionvars()
@@ -231,7 +232,7 @@ class GUIAPPLICATION(Frame):
 			pady=20).grid(row=3, column=0)
 		getentry = StringVar()
 		Entry(self.frame, textvariable=getentry).grid(row=3, column=1)
-		self.problemdescription['label'] = getentry.get()
+		self.problemdescription['label'] = getentry
 	
 	
 	def decisionvars(self,row=4):
