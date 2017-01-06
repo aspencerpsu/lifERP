@@ -1,75 +1,51 @@
 
-Number of variables = 9
+ ___TUCKER PROBLEM___ 
 
-Number of constraints = 4
+Number of variables = 4
+
+Number of constraints = 3
 
 solve output = 0
-Problem solved in 20.000000 ms 
+Problem solved in 55.000000 ms 
 
-Optimal objective value = 5983.333333 
+Optimal objective value = 6650.000000 
 
-plant_1 = 400.000000
+plant_1 = 0.000000
 
 plant_3 = 0.000000
 
-plant_2 = 16.666667
+plant_2 = 950.000000
 
-plant_4 = 533.333333
-
-s4 = 0.000000
-
-a1 = 0.000000
-
-s3 = 0.000000
-
-a2 = 0.000000
-
-e2 = 0.000000
+plant_4 = 0.000000
 
  
 Advanced Usage: 
 
  
-Problem Solved in 2 iterations
+Problem Solved in 1 iterations
  
-plant_1: reduced cost = -0.000000
+plant_1: reduced cost = -3.000000
  
-plant_3: reduced cost = -0.666667
+plant_3: reduced cost = -1.000000
  
-plant_2: reduced cost = -0.000000
+plant_2: reduced cost = 0.000000
  
-plant_4: reduced cost = 0.000000
- 
-s4: reduced cost = -10000.000000
- 
-a1: reduced cost = 0.000000
- 
-s3: reduced cost = 0.000000
- 
-a2: reduced cost = 0.000000
- 
-e2: reduced cost = 0.000000
+plant_4: reduced cost = 8.000000
 
- constraint raw material cost: dual value = -0.000000
- activity=4483.333333
+ constraint raw material costs: dual value = -0.000000
+ activity=4750.000000
  
- constraint raw material cost Lower to Upper Boundary:
- 	  -inf < 4483 < 5000.000000
+ constraint raw material costs Lower to Upper Boundary:
+ 	  -inf < 4750 < 5000.000000
 
- constraint init: dual value = 5.666667
+ constraint init: dual value = 7.000000
  activity=950.000000
  
  constraint init Lower to Upper Boundary:
  	  950.000000 < 950 < 950.000000
 
- constraint labor costs: dual value = 0.333333
- activity=4600.000000
+ constraint hourly labor: dual value = -0.000000
+ activity=3800.000000
  
- constraint labor costs Lower to Upper Boundary:
- 	  -inf < 4600 < 4600.000000
-
- constraint plant_4 min production: dual value = -2.333333
- activity=400.000000
- 
- constraint plant_4 min production Lower to Upper Boundary:
- 	  400.000000 < 400 < inf
+ constraint hourly labor Lower to Upper Boundary:
+ 	  -inf < 3800 < 4600.000000
