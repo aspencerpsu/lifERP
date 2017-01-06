@@ -52,15 +52,19 @@ class ProblemStatement(object):
 		infinity = solver.infinity()
 		vars = {}
 		cons = {}
-		for num in variables:
-			if not num[1] and num[2]:
-				vars[str(num[0])] = solver.NumVar(0.0, infinity, str(num[0]))
-			elif not num[1]:
-				vars[str(num[0])] = solver.NumVar(float(num[2]), infinity, str(num[0]))
-			elif not num[2]:
-				vars[str(num[0])] = solver.NumVar(0.0, float(num[1]), str(num[0]))
-			elif num[1] and num[2]:
+		for num in variables:		
+			if num[1].__nonzero__() and num[2].__nonzero__():
+				print ("option 1")
                                 vars[str(num[0])] = solver.NumVar(0.0, float(num[1]), float(num[2]), str(num[0]))
+			elif not num[1].__nonzero__() and num[2].__nonzero__():
+				print ("option 2")
+				vars[str(num[0])] = solver.NumVar(0.0, float(num[1]), str(num[0]))
+			elif not num[2].__nonzero__() and num[1].__nonzero__():
+				print ("option 3")
+				vars[str(num[0])] = solver.NumVar(float(num[2]), infinity, str(num[0]))
+			elif not (num[1].__nonzero__() and num[2].__nonzero__()):
+				print ("option 4")
+				vars[str(num[0])] = solver.NumVar(0.0, infinity, str(num[0]))
                         else:
                                 raise SyntaxError("Error in variable boundaries")
 
