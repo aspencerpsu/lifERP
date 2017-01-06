@@ -36,30 +36,81 @@ def configuregui():
 	guiapp.hscrollbar.update_idletasks()
 
 
+def orsolver():
+	global guiapp, root
+	
+	varentries = []
+
+	for x in guiapp.infVarDir:
+		try:
+			print guiapp.infVarDir[x]
+			if x != 'decisionvars' and 'labels':
+				varentries.append((guiapp.infVarDir[x]['entry'].get(), 
+						   guiapp.infVarDir[x]['bounds'][1].get(),
+						   guiapp.infVarDir[x]['bounds'][3].get()
+						   )
+						  )
+			else:
+				pass
+		except KeyError("Sorry but %s does not have a key bounds"%(x)):
+			print x
+			
+	varconstraints = [{'label': guiapp.constraintloop[x]['label'].cget('text'), 
+				'boundary': guiapp.constraintloop[x]['constraintbound'][1].get(), 
+				'op': guiapp.constraintloop[x]['operator'][1].get(), 
+				'entry': guiapp.constraintloop[x]['entry'].get()} for x in guiapp.constraintloop if x != 'title']
+
+	objective = guiapp.objectiveblock.values()[1]
+
+	createsimplex = simplex_class.ProblemStatement(constraints=varconstraints, 
+							objective=objective['entry'][1].get(), 
+							type=objective['type'].get(), 
+							name = guiapp.problemdescription['label'],
+							variables=varentries)
 
 def additionalVarCap(**kwargs):
 	"""place a rh boundary on variable"""
 	global guiapp, root
 	if kwargs['state'].get(): #if the user wants an infinite guess
 		try:
-			guiapp.infVarDir[kwargs['instance']]['label'].grid_forget()
-			guiapp.infVarDir[kwargs['instance']]['cap'][0].grid_forget()
-			guiapp.infVarDir[kwargs['instance']]['label'].destroy()
-			guiapp.infVarDir[kwargs['instance']]['cap'][0].destroy()
-			del guiapp.infVarDir[kwargs['instance']]['label']
+			guiapp.infVarDir[kwargs['instance']]['labels'][0].grid_forget()
+			guiapp.infVarDir[kwargs['instance']]['labels'][1].grid_forget()
+			guiapp.infVarDir[kwargs['instance']]['bounds'][0].grid_forget()
+			guiapp.infVarDir[kwargs['instance']]['bounds'][2].grid_forget()
+			guiapp.infVarDir[kwargs['instance']]['labels'][0].destroy()
+			guiapp.infVarDir[kwargs['instance']]['bounds'][0].destroy()
+			guiapp.infVarDir[kwargs['instance']]['bounds'][2].destroy()
+			guiapp.infVarDir[kwargs['instance']]['labels'][1].destroy()
 		except KeyError:
 			"Nothing to do" 
 	
 	else:
 		instancerow = int(guiapp.infVarDir[kwargs['instance']]['self'].grid_info()['row'])
-		guiapp.infVarDir[kwargs['instance']]['label'] = Label(guiapp.frame, text="cap?")
-		guiapp.infVarDir[kwargs['instance']]['cap'][0] = Entry(guiapp.frame, 
-									textvariable=kwargs['capvar'])
+		guiapp.infVarDir[kwargs['instance']]['labels'] = [Label(guiapp.frame, text="cap?"),
+								  Label(guiapp.frame, text="floor?")]
+	
+		guiapp.infVarDir[kwargs['instance']]['bounds'] = []
+
+		guiapp.infVarDir[kwargs['instance']]['bounds'].append(Entry(guiapp.frame, 
+									textvariable=kwargs['capvar'],
+									width=6)
+								       )
+		guiapp.infVarDir[kwargs['instance']]['bounds'].append(kwargs['capvar'])
+
+		guiapp.infVarDir[kwargs['instance']]['bounds'].append(Entry(guiapp.frame,
+									   textvariable=kwargs['floorvar'],
+									   width=6)
+									)
+		guiapp.infVarDir[kwargs['instance']]['bounds'].append(kwargs['floorvar'])
+        
+		print guiapp.infVarDir[kwargs['instance']]['bounds']
 
 		#bind them A.K.A. hand the daughter's off to the groom for marriage
 
-		guiapp.infVarDir[kwargs['instance']]['label'].grid(row=instancerow, column=3)
-		guiapp.infVarDir[kwargs['instance']]['cap'][0].grid(row=instancerow, column=4)
+		guiapp.infVarDir[kwargs['instance']]['labels'][0].grid(row=instancerow, column=3)
+		guiapp.infVarDir[kwargs['instance']]['bounds'][0].grid(row=instancerow, column=4)
+		guiapp.infVarDir[kwargs['instance']]['labels'][1].grid(row=instancerow, column=5)
+		guiapp.infVarDir[kwargs['instance']]['bounds'][2].grid(row=instancerow, column=6)
 
 def additionalDecisionVar(**kwargs):
 	global guiapp, root
@@ -195,22 +246,34 @@ class GUIAPPLICATION(Frame):
 							'entry': getvar}
 		self.checkbox.grid(row=row, column=2)
 		
-		self.infVarDir[id(self.checkbox)]['label'] = Label(self.frame, text="cap?")	
-		getentry = IntVar()
-		self.infVarDir[id(self.checkbox)]['cap'] =\
-			[Entry(self.frame, textvariable=getentry), getentry]
+		self.infVarDir[id(self.checkbox)]['labels'] = [Label(self.frame, text="cap? leave blank for inf."), 
+								Label(self.frame, text="floor?")]	
+		getceil = DoubleVar()
+		getfloor = DoubleVar()
+		self.infVarDir[id(self.checkbox)]['bounds'] = [Entry(self.frame, 
+									textvariable=getceil,width=7), 
+								getceil, 
+								Entry(self.frame, 
+									textvariable=getfloor,
+									width=7), 
+								getfloor]
 
-		self.infVarDir[id(self.checkbox)]['label'].grid(row=row, column=3)
-		self.infVarDir[id(self.checkbox)]['cap'][0].grid(row=row, column=4)
+		self.infVarDir[id(self.checkbox)]['labels'][0].grid(row=row, column=3, padx=5)
+		self.infVarDir[id(self.checkbox)]['bounds'][0].grid(row=row, column=4, sticky=W)
+		self.infVarDir[id(self.checkbox)]['labels'][1].grid(row=row, column=5, padx=5)
+		self.infVarDir[id(self.checkbox)]['bounds'][2].grid(row=row, column=6, sticky=W)
 		self.infVarDir[id(self.checkbox)]['self'].config(variable=self.infVarDir[id(self.checkbox)]['var'], 
 									command=(lambda instance=id(self.checkbox), 
 											state=self.infVarDir[id(self.checkbox)]['var']: 
-												additionalVarCap(instance=instance, state=state, capvar=getentry) ) )
+												additionalVarCap(instance=instance, 
+														  state=state, 
+														  capvar=getceil, 
+														  floorvar=getfloor) ) )
 
 
 		self.infVarDir['decisionvars'] += 2 #remember the row for variables of user additions for later use...
 
-		self.labeladd = Label(self.frame, text="Add More Decisions?")		
+		self.labeladd = Label(self.frame, text="Add More Decisions?")
 		self.infVarDir[id(self.checkbox)]['labeladd'] = self.labeladd
 		self.infVarDir[id(self.checkbox)]['labeladd'].grid(row=row+1, 
 									padx=15, 
@@ -222,16 +285,21 @@ class GUIAPPLICATION(Frame):
 					bg="#738A05", 
 					fg="#ffffff", 
 					relief="raised", 
-					command=(lambda newrow=self.infVarDir['decisionvars'], id=id(self.checkbox): additionalDecisionVar(newrow=newrow, id=id)))
+					command=(lambda newrow=self.infVarDir['decisionvars'], 
+						  id=id(self.checkbox): additionalDecisionVar(newrow=newrow, 
+						  id=id)))
 
 		self.infVarDir[id(self.checkbox)]['buttonadd'] = self.button
+
 		self.infVarDir[id(self.checkbox)]['buttonadd'].grid(row=row+1, column=1, sticky=N+S+E+W, pady=25)
+
 		self.buttonno = Button(self.frame, 
 					text="No", 
 					bg="#D11C24", 
 					fg="#ffffff", 
 					relief="raised", 
-					command=(lambda row=self.infVarDir['decisionvars']+1, id=id(self.checkbox): nodecisionvars(row=row, id=id)))
+					command=(lambda row=self.infVarDir['decisionvars']+1, 
+					                 id=id(self.checkbox): nodecisionvars(row=row, id=id)))
 		self.infVarDir[id(self.checkbox)]['buttonno'] = self.buttonno
 		self.infVarDir[id(self.checkbox)]['buttonno'].grid(row=row+1, 
 									column=2, 
@@ -257,7 +325,7 @@ class GUIAPPLICATION(Frame):
 		#constraint label
 		self.constraintlabel = Label(self.frame, text="%s:"%(constraint))
 		self.constraintloop[id(self.constraintlabel)] = {'label': self.constraintlabel}
-		self.constraintlabel.grid(row=row+2, column=0, pady=29, sticky=E)
+		self.constraintlabel.grid(row=row+2, column=0, pady=23, sticky=E)
 
 		#constraint entry
 		getentry = StringVar()
@@ -279,7 +347,7 @@ class GUIAPPLICATION(Frame):
 		self.constraintloop[id(self.constraintlabel)]['labelop']\
 					= self.constraintlabelop
 
-		self.constraintlabelop.grid(row=row+2, column=2, ipady=4, sticky=N)
+		self.constraintlabelop.grid(row=row+2, column=2, ipady=2, sticky=N)
 
 		#constraint boundary
 		getboundary = StringVar()
@@ -379,20 +447,8 @@ class GUIAPPLICATION(Frame):
 		self.submitbutton.grid(row=row+1, column=5, columnspan=2, sticky=E+W+S+N)
 
 	def solve(self, row):
-		configuregui() # PATCH
-		def orsolver():
-			varentries = [(self.infVarDir[x]['entry'].get(), 
-					self.infVarDir[x]['cap'][1].get()) for x in self.infVarDir if x != 'decisionvars']
 
-			varconstraints = [{'label': self.constraintloop[x]['label'].cget('text'), 
-						'boundary': self.constraintloop[x]['constraintbound'][1].get(), 
-						'op': self.constraintloop[x]['operator'][1].get(), 
-						'entry': self.constraintloop[x]['entry'].get()} for x in self.constraintloop if x != 'title']
-			objective = self.objectiveblock.values()[1]
-			createsimplex = simplex_class.ProblemStatement(constraints=varconstraints, 
-									objective=objective['entry'][1].get(), 
-									type=objective['type'].get(), 
-									variables=varentries)
+		configuregui() # PATCH	
 
 		self.frame_2 = Frame(self.frame)
 		self.button = Button(self.frame_2, 
