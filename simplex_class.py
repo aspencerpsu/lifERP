@@ -15,9 +15,9 @@ def file_save(text):
     f = tkFileDialog.asksaveasfile(mode="w", defaultextension=".txt")
     if f is None:
     	f = open("report.txt", "w+")
-	    text2save = str(text.get(1.0, END))
-	    f.write(text2save)
-	    f.close()
+	text2save = str(text.get(1.0, END))
+	f.write(text2save)
+	f.close()
         return
     elif str(text.get(1.0, END)):
     	text2save = str(text.get(1.0, END))
@@ -29,8 +29,9 @@ def file_save(text):
 class ProblemStatement(object):
 
 	def __init__(self, **kwargs):
-		print(" \n \n -------------Linear Programming Example---------------- W/ %s ----------" %"CLP")
+		print(" \n \n -------------%s---------------- W/ %s ----------" %(kwargs['name'], 'CLP'))
 		print("\n \n *Natural Language API* ")
+		self.title = kwargs['name']
 		self.optimization_problem(0, kwargs['variables'], kwargs['constraints'], 
 						kwargs['type'], kwargs['objective'])
 	
@@ -52,10 +53,16 @@ class ProblemStatement(object):
 		vars = {}
 		cons = {}
 		for num in variables:
-			if not num[1]:
+			if not num[1] and num[2]:
 				vars[str(num[0])] = solver.NumVar(0.0, infinity, str(num[0]))
-			else:
-				vars[str(num[0])] = solver.NumVar(0.0, int(num[1]), str(num[0]))
+			elif not num[1]:
+				vars[str(num[0])] = solver.NumVar(float(num[2]), infinity, str(num[0]))
+			elif not num[2]:
+				vars[str(num[0])] = solver.NumVar(0.0, float(num[1]), str(num[0]))
+			elif num[1] and num[2]:
+                                vars[str(num[0])] = solver.NumVar(0.0, float(num[1]), float(num[2]), str(num[0]))
+                        else:
+                                raise SyntaxError("Error in variable boundaries")
 
 		if type == 'max':
 			groupings = re.split('\+', objective)
@@ -106,7 +113,9 @@ class ProblemStatement(object):
 					command=(lambda text=text: file_save(text)), 
 					accelerator="Ctrl+Shift+S")
 
-		filemenu.add_command(label="Reload Module", command=(lambda: reload(simplex_class)), accelerator="Ctrl+T")
+		filemenu.add_command(label="Reload Module", 
+					command=(lambda: reload(simplex_class)), 
+					accelerator="Ctrl+T")
 
 		filemenu.add_command(label="Close", 
 					command=donothing, 
@@ -118,6 +127,11 @@ class ProblemStatement(object):
 
 		helpmenu = Menu(menubar, tearoff=0)
 		helpmenu.add_command(label="Help", command=donothing) #come back to this
+
+
+		################### TITLE PARAMETERS ######################
+		text.insert(END, "\n ___%s___ \n" %(self.title.upper()))
+
 		text.insert(END, 
 				"\nNumber of variables = %d\n"%(model.NumVariables()))
 
