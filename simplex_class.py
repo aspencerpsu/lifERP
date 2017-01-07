@@ -163,7 +163,7 @@ class ProblemStatement(object):
 			text.insert(END, "\n%s = %f\n"%(variable.name(), variable.solution_value()))
 			print ("%s = %f" %(variable.name(), variable.solution_value()))
 
-		text.insert(END, "\n \nAdvanced Usage: \n")
+		text.insert(END, "\n \nAdvanced Stats: \n")
 		print ("\n \nAdvanced Stats: \n")
 		text.insert(END, "\n \nProblem Solved in %d iterations"%model.iterations())
 		print ("\n \n Problem solved in %d iterations" %model.iterations())
@@ -176,10 +176,8 @@ class ProblemStatement(object):
 		activities = model.ComputeConstraintActivities() #printout of RHS = `b` in AX = b
 
 		for i, constraint in enumerate(constraints):
-	
-			print(dir(constraint))
 			text.insert(END, 
-				"\n\n constraint %s: dual value = %f\n activity=%f" %(constraint.name(), 
+				"\n\nconstraint %s: \ndual value = %f\n activity=%f" %(constraint.name(), 
 											constraint.dual_value(), 
 											activities[constraint.index()]))
 
@@ -187,15 +185,18 @@ class ProblemStatement(object):
 										constraint.dual_value(),
 										activities[constraint.index()]))
 			text.insert(END, 
-					"\n \n constraint %s Lower to Upper Boundary:\n \t  %f < %.2d < %f" %(constraint.name(),
-														constraint.Lb(),
-														activities[constraint.index()],
-														constraint.Ub()))
+					"\nLower to Upper Boundary:\n \t  %f < %.2d < %f" %(constraint.Lb(),
+											    activities[constraint.index()],
+											    constraint.Ub()))
 
-			print ("constraint %s Lower.....to.....Upper Boundary: %f < %.2d < %f" %(constraint.name(), 
-												constraint.Lb(),
-												activities[constraint.index()],
-												constraint.Ub()))
+			print ("\nLower.....to.....Upper Boundary:\n\t %f < %.2d < %f" %(constraint.Lb(),
+										        activities[constraint.index()],
+										        constraint.Ub()))
+
+			print("\nSLACK/SURPLUS status:\n\t %s"%(constraint.basis_status()))
+
+			text.insert(END,
+					"\nSLACK/SURPLUS status:\n\t %s"%(constraint.basis_status()))
 		text.config(state=DISABLED)
 		text.pack()
 		self.root.config(menu=menubar)
