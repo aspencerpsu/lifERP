@@ -3,8 +3,16 @@ from ortools.linear_solver import pywraplp #problems to solve using pywrap advan
 import sys, Tkinter
 from Tkinter import *
 import simplex_class
+import tkMessageBox
 
-root = Tk()
+def savework():
+	global root	
+	if tkMessageBox.askokcancel("Quit", "You haven't solved the model, do you still want to terminate?"):
+		root.destroy()
+
+def _on_mousewheel(event):
+	global guiapp
+	guiapp.canvas.yview_scroll(-1*(event.delta/120), "units")
 
 def resetfunction():
 	import simplex_class
@@ -181,7 +189,6 @@ class GUIAPPLICATION(Frame):
 		self.hscrollbar = horizontalscrollbar
 		##########################################
 
-
 		self.label = Label(self.frame, 
 					width=int(.50*master.winfo_width()), 
 					height=int(.50*master.winfo_height()),
@@ -205,6 +212,7 @@ class GUIAPPLICATION(Frame):
 
 		canvas.create_window(1, 1, anchor=NE, window=self.frame)
 		canvas.config(scrollregion=canvas.bbox("all"))
+		canvas.bind_all("<MouseWheel>", _on_mousewheel)
 		self.canvas = canvas
 		self.master.config(width=800, height=2000)
 		self.master.grid_rowconfigure(0, weight=1)
@@ -463,6 +471,10 @@ class GUIAPPLICATION(Frame):
 		self.frame_2.grid(row=row, column=2, columnspan=5, rowspan=3, sticky=N+W+E+S)
 		self.button.grid(row=0, column=0, sticky=N+W+E+S) 
 
+#######################################################################
+
+root = Tk()
+root.protocol("WM_DELETE_WINDOW", savework)
 root.geometry("600x600+20+10") #Make sure to add the window length and height of the object
 guiapp = GUIAPPLICATION(root)
 root.mainloop()
