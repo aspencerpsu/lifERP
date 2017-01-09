@@ -1,14 +1,23 @@
+#! /usr/bin/python2.7
+
 from ortools.linear_solver import linear_solver_pb2 #linear problem solving tool
 from ortools.linear_solver import pywraplp #problems to solve using pywrap advantage tools
 import sys, Tkinter
 from Tkinter import *
 import simplex_class
 import tkMessageBox
+import sys
+
+def destroymodel(root):
+	root.quit()
+	root.destroy()
 
 def savework():
-	global root	
-	if tkMessageBox.askokcancel("Quit", "You haven't solved the model, do you still want to terminate?"):
+	global root
+	if tkMessageBox.askyesnocancel("Quit", "You haven't solved the model, do you still want to terminate?"):
 		root.destroy()
+	else:
+		print "bad mofo"
 
 def _on_mousewheel(event):
 	global guiapp
@@ -175,6 +184,26 @@ class GUIAPPLICATION(Frame):
 				width=400, 
 				height=3000)
 
+
+		############## MENU ###############
+		menubar = Menu(self.master)
+
+		filemenu = Menu(menubar, tearoff=0)
+		filemenu.add_separator()
+		filemenu.add_command(label="Quit",
+				      command=(lambda: destroymodel(self.master))
+				     )
+
+		helpmenu = Menu(menubar, tearoff=0)
+
+		helpmenu.add_command(label="Help?", 
+				      command=(sys.stdout.write('nothing...'))
+				     )
+
+		menubar.add_cascade(label="File", menu=filemenu)
+		menubar.add_cascade(label="Help", menu=helpmenu)
+		################################### 
+
 		#### Frame ####
 		self.frame = Frame(canvas, height=8000, width=400)
 
@@ -213,8 +242,11 @@ class GUIAPPLICATION(Frame):
 		canvas.create_window(1, 1, anchor=NE, window=self.frame)
 		canvas.config(scrollregion=canvas.bbox("all"))
 		canvas.bind_all("<MouseWheel>", _on_mousewheel)
+
 		self.canvas = canvas
-		self.master.config(width=800, height=2000)
+		
+		
+		self.master.config(width=800, height=2000, menu=menubar)
 		self.master.grid_rowconfigure(0, weight=1)
 		self.master.grid_columnconfigure(0, weight=1)
 	
