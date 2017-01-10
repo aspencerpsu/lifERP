@@ -135,24 +135,22 @@ class ProblemStatement(object):
 		try:	
 			assert model.Solve() == pywraplp.Solver.OPTIMAL #The problem has an optimal solution
 			assert model.VerifySolution(1e-7, True)
+			result_status = 0
+			print ("Success")
 
-		except:
-			if solver != 'glop': 
-				print("####### I'm TRYING THE GLOP FUNCTION ###########")
-				return self.optimization_problem(2,
-							          self.variables, 
-							          self.constraints, 
-							          self.type,
-							          self.objective, 
-							          'glop')
-			else:
-				print ("linear problem is not solvable/infeasible for %s method"%(solver_type))
-				tkMessageBox.showerror('infeasible', message="Problem is infeasible, no x* node")
-				result_status = 3
 		finally:
-			print ("linear problem is not solvable/infeasible")
+			print ("linear problem is not solvable/infeasible for %s method"%(solver_type))
 			tkMessageBox.showerror('infeasible', message="Problem is infeasible, no x* node")
 			result_status = 3
+			if solver_type == 'clp':	
+				return self.optimization_problem(2,
+								  self.variables, 
+								  self.constraints, 
+								  self.type,
+								  self.objective, 
+								  'glop')
+			else:
+				pass
 
 		######## SOLUTION IS OPTIMAL ######
 		self.root = Toplevel()
