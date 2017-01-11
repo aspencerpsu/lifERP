@@ -129,28 +129,33 @@ class ProblemStatement(object):
 		print (vars.values(), cons.values())
 		self.SolveAndPrint(solver, vars.values(), cons.values(), solver_type)
 
-	def SolveAndPrint(self, model, decisions, constraints,solver_type):
+	def SolveAndPrint(self, model, decisions, constraints, solver_type):
 		""" Solve the problem and print the solution"""
-	
-		try:	
-			assert model.Solve() == pywraplp.Solver.OPTIMAL #The problem has an optimal solution
+		try:
+			result_status = model.Solve()
+			assert result_status == pywraplp.Solver.OPTIMAL #The problem has an optimal solution
 			assert model.VerifySolution(1e-7, True)
-			result_status = 0
 			print ("Success")
 
-		finally:
-			print ("linear problem is not solvable/infeasible for %s method"%(solver_type))
-			tkMessageBox.showerror('infeasible', message="Problem is infeasible, no x* node")
+		except AssertionError:
 			result_status = 3
-			if solver_type == 'clp':	
+			print('linear problem is not sovable/infeasible for %s method'%(solver_type))
+			tkMessageBox.showerror('infeasible', message='Problem is infeasible, no x* node for %s'%(solver_type))
+			if solver_type == 'clp':
 				return self.optimization_problem(2,
-								  self.variables, 
-								  self.constraints, 
-								  self.type,
-								  self.objective, 
-								  'glop')
+								   self.variables,
+								   self.constraints,
+								   self.type,
+								   self.objective,
+								   'glop')
 			else:
-				pass
+
+				print('an error has occured, please review data')
+				tkMessageBox.showerror('an error has occured, please review data')
+				return	
+
+		finally:
+			pass
 
 		######## SOLUTION IS OPTIMAL ######
 		self.root = Toplevel()
