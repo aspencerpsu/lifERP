@@ -33,6 +33,7 @@ def resetfunction():
 	
 	reload(simplex_class)
 	root = Tk()
+	root.title("LifERP system")
 	root.geometry("600x600+20+10")
 	guiapp = SimplexGui(root)
 	guiapp.mainloop()
@@ -515,8 +516,12 @@ class SimplexGui(Frame):
 #######################################################################
 
 root = Tk()
+root.iconbitmap(default="lifERP.ico")
 root.protocol("WM_DELETE_WINDOW", savework)
+
+lab = Label(root, text="LifeERP") #Application Name
+
 root.geometry("600x600+20+10") #Make sure to add the window length and height of the object
-root.iconbitmap(default="C:\\Users\\Akeem Spencer\\Desktop\\TOOLS\\ortools_examples\\examples\\MYOWNSAMPLES\\")
+root.title("LifERP system")
 guiapp = SimplexGui(root)
 root.mainloop()
