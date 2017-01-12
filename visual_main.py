@@ -34,7 +34,7 @@ def resetfunction():
 	reload(simplex_class)
 	root = Tk()
 	root.geometry("600x600+20+10")
-	guiapp = GUIAPPLICATION(root)
+	guiapp = SimplexGui(root)
 	guiapp.mainloop()
 
 def configuregui():
@@ -172,9 +172,11 @@ def constraintend(**kwargs):
 
 	configuregui()
 	
-class GUIAPPLICATION(Frame):
+class SimplexGui(Frame):
 
 	def __init__(self, master):
+		import transportation_class #FOR TRANSPORTATION GUI
+
 		self.master = master # Master Widget
 		verticalscrollbar = AutoScrollbar(self.master, orient=VERTICAL)
 		horizontalscrollbar = AutoScrollbar(self.master, orient=HORIZONTAL)
@@ -194,13 +196,21 @@ class GUIAPPLICATION(Frame):
 				      command=(lambda: destroymodel(self.master))
 				     )
 
-		helpmenu = Menu(menubar, tearoff=0)
+		helpmenu = Menu(menubar, tearoff=0) #help menu
 
 		helpmenu.add_command(label="Help?", 
 				      command=(sys.stdout.write('nothing...'))
 				     )
+		problemmenu = Menu(menubar, tearoff=0) #problem switch menu
+		problemmenu.add_command(label="transportation",
+					command=(lambda: transportation_class.TransportationGui.transportationtab(master))
+					)
+		problemmenu.add_command(label="simplex",
+				        command=(lambda: resetfunction())
+				        )
 
 		menubar.add_cascade(label="File", menu=filemenu)
+		menubar.add_cascade(label="Problems", menu=problemmenu)
 		menubar.add_cascade(label="Help", menu=helpmenu)
 		################################### 
 
@@ -244,7 +254,6 @@ class GUIAPPLICATION(Frame):
 		canvas.bind_all("<MouseWheel>", _on_mousewheel)
 
 		self.canvas = canvas
-		
 		
 		self.master.config(width=800, height=2000, menu=menubar)
 		self.master.grid_rowconfigure(0, weight=1)
@@ -508,5 +517,5 @@ class GUIAPPLICATION(Frame):
 root = Tk()
 root.protocol("WM_DELETE_WINDOW", savework)
 root.geometry("600x600+20+10") #Make sure to add the window length and height of the object
-guiapp = GUIAPPLICATION(root)
+guiapp = SimplexGui(root)
 root.mainloop()
