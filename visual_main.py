@@ -517,5 +517,6 @@ class SimplexGui(Frame):
 root = Tk()
 root.protocol("WM_DELETE_WINDOW", savework)
 root.geometry("600x600+20+10") #Make sure to add the window length and height of the object
+root.iconbitmap(default="C:\\Users\\Akeem Spencer\\Desktop\\TOOLS\\ortools_examples\\examples\\MYOWNSAMPLES\\")
 guiapp = SimplexGui(root)
 root.mainloop()
