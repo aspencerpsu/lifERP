@@ -2,7 +2,7 @@
 
 #LifERP
 ----------
-### MultiLP solution guide for users of all businesses
+### MultiLP solutions guide for users of all businesses
 
 The following problems ** cannot ** be solved with this gui:
 
@@ -14,15 +14,15 @@ The following problems ** cannot ** be solved with this gui:
  6. GO lp
  7. Mixed-Integer Non-Linear lp
  8. Semidefinite lp
- 9. Cp lp
+ <s>9. Cp lp</s>
  10. Metaheuristic lp
  11. Second Order Cone lp
 
 If you're an undergraduate or graduate student, please do not use this for homework or fast solutions to group projects. This is created **only** for professionals and business professionals in need of solver to handle roughcut estimates of decisions, however the user is limited to 200 variables. If otherwise suggested of needing a different package to interact with the solver, contact aspencerpsu@gmail.com or create an issue and I'd be glad troubleshoot or give assistance with installation and packaging.
 
- ### Installation:
+<h3>Installation:</h3>
  <br>
- #### For Linux/Ubuntu:
+<h4>For Linux/Ubuntu:</h4>
 
      The following packages are needed:
            1. tkinter
