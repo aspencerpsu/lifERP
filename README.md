@@ -1,4 +1,5 @@
 ![LifeERP][1]
+
 #LifERP
 ----------
 ### simplex linear gui for linear programming answersdfdfasdadfasdfadfdfs
@@ -19,8 +20,9 @@ The following problems ** cannot ** be solved with this gui:
 
 If you're an undergraduate or graduate student, please do not use this for homework or fast solutions to group projects. This is created **only** for professionals and business professionals in need of solver to handle roughcut estimates of decisions, however the user is limited to 200 variables. If otherwise suggested of needing a different package to interact with the solver, contact aspencerpsu@gmail.com or create an issue and I'd be glad troubleshoot or give assistance with installation and packaging.
 
- ## ** Installation: **
- <tb><tb>  #### For Linux/Ubuntu:
+ ## Installation:
+ <br>
+ #### For Linux/Ubuntu:
 
      The following packages are needed:
            1. tkinter
@@ -60,7 +62,7 @@ For other Linux distro's visit [google optimization tools][4] to import and conf
        $ make Makefile
 <br>
 <br>
-<div style="color: rgba(255,0,0,1);">Warning</div>
+<h2 style="color: rgba(255,0,0,1);">Warning</h2>
 <br>
 <br>
 If your machine build is based Unix Architecture (e.g. Apple Computer), you may have to replace the Tkinter imports to an all-lower cap text (e.g. tkinter)
