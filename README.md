@@ -13,7 +13,7 @@ The following problems ** cannot ** be solved with this gui:
  5. Quadratic lp
  6. GO lp
  7. Mixed-Integer Non-Linear lp
- 8. Semidefinite lp
+ 8. Semidefinite lp<br>
  <s>9. Cp lp</s>
  10. Metaheuristic lp
  11. Second Order Cone lp
