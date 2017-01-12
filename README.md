@@ -2,7 +2,7 @@
 
 #LifERP
 ----------
-### simplex linear gui for linear programming answersdfdfasdadfasdfadfdfs
+### MultiLP solution guide for users of all businesses
 
 The following problems ** cannot ** be solved with this gui:
 
@@ -20,7 +20,7 @@ The following problems ** cannot ** be solved with this gui:
 
 If you're an undergraduate or graduate student, please do not use this for homework or fast solutions to group projects. This is created **only** for professionals and business professionals in need of solver to handle roughcut estimates of decisions, however the user is limited to 200 variables. If otherwise suggested of needing a different package to interact with the solver, contact aspencerpsu@gmail.com or create an issue and I'd be glad troubleshoot or give assistance with installation and packaging.
 
- ## Installation:
+ ### Installation:
  <br>
  #### For Linux/Ubuntu:
 
@@ -63,13 +63,11 @@ For other Linux distro's visit [google optimization tools][4] to import and conf
 <br>
 <br>
 <h2 style="color: rgba(255,0,0,1);">Warning</h2>
-<br>
-<br>
 If your machine build is based Unix Architecture (e.g. Apple Computer), you may have to replace the Tkinter imports to an all-lower cap text (e.g. tkinter)
 <br>
 Once you have the ortools created and swapped the pywraplp file for the modified version, you can download and compile the Tkinter module by `sudo apt-get install` for linux or use `homebrew` for mac os x.
 
-Once the packages have been downloaded and configured successfully, run `python visual_example.py` to start the simplex gui.
+Once the packages have been downloaded and configured successfully, run `python visual_.py` in the respective path to start the default gui.
 
 The tkinter module will prompt you to input the decision variables fields and input the constraint within each field. Be forwarned, there are **no** substractions to be added in the system of equations, only a sum *e.g.*:
 <br>
@@ -82,7 +80,7 @@ For more help on using the simplex gui, contact aspencerpsu@gmail.com or write a
 
 **If The Solution is not feasible....**
 
-If the solution is not feasible **&** the objective row is a maximization problem definition expression, you have to convert the matrix into a BFS with slack variables directly inside each row. I.E. a collective set of non basic variables and basic variables: {x1, x2, x3...} BVs, {s1, s2, s3} NBV's. Once you have the constraint entry filled, you can ** * ONLY * ** use the `>=` operator for the item to work correctly.
+If the solution is not feasible **&** the objective row is a maximization problem definition expression, you may have to convert the matrix into a BFS with slack variables directly inside each row. I.E. a collective set of non basic variables and basic variables: {x1, x2, x3...} BVs, {s1, s2, s3} NBV's. Once you have the constraint entry filled, you can ** * ONLY * ** use the `<=`, `>=`, `>`, or `<` operator for the item to work correctly.
 
 ![slack inputs][6]
 
