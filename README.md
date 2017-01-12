@@ -1,7 +1,8 @@
 
- # simplex linear-gui
+![LifeERP][1]
+#LifERP
 ----------
-### simplex linear gui for linear programming answers
+### simplex linear gui for linear programming answersdfdfasdadfasdfadfdfs
 
 The following problems ** cannot ** be solved with this gui:
 
@@ -42,24 +43,26 @@ If you're an undergraduate or graduate student, please do not use this for homew
          17. openjdk-7-jdk
          18. make (should be complimentary with standard ubuntu package)
 
-All packages can be installed with the `sudo apt-get install` command. To use .NET on ubuntu you need to install Mono. To get the .gz/tar archive directory, download the package using [this link][1] and then run `sudo make Makefile` or use the g++ compiler on the Makefile issuing `sudo gcc Makefile` within the root of the project directory . To setup using the python package run `python.exe setup.py install --user` under the ortools_examples directory. To check whether the or-tools python package has all the needed dependencies, hit python check_python_deps.py.
+All packages can be installed with the `sudo apt-get install` command. To use .NET on ubuntu you need to install Mono. To get the .gz/tar archive directory, download the package using [this link][2] and then run `sudo make Makefile` or use the g++ compiler on the Makefile issuing `sudo gcc Makefile` within the root of the project directory . To setup using the python package run `python.exe setup.py install --user` under the ortools_examples directory. To check whether the or-tools python package has all the needed dependencies, hit python check_python_deps.py.
 
-Once the tools have been compiled and routed to the respective folders(s). you **must** delete the pywraplp.py file and replace it with this [raw file][2] slightly modified for the tkinter gui automation and replace where the setup configured the module directory. (Again replace the pathfile with the modified pywrap.py file). 
+Once the tools have been compiled and routed to the respective folders(s). you **must** delete the pywraplp.py file and replace it with this [raw file][3], slightly modified for the tkinter gui automation and label it with the same filename (pywraplp). (Again replace the pathfile with the modified pywrap.py file). 
 
-For other Linux distro's visit [google optimization tools][3].
+For other Linux distro's visit [google optimization tools][3] to import and configure the build tools.
 
 
 <br>
- #### <tb> For mac OS X:  
-      The following packages are mandatory for proper configuration:
-          1. xcode (CLI ONLY)
+ #### <tb> For mac OS X:
+      The following packages are mandatory for the proper assembly configuration:
+          1. xcode (CLI Only)
           2. javac
           3. cmake
 
        After changing directories into or-tools, run:
        $ make Makefile
-
 <br>
+<br>
+<font style="color: rgba(255,0,0)">Warning</font>
+If your machine build is based Unix Architecture (e.g. Apple Computer), you may have to replace the Tkinter imports to an all-lower cap text (e.g. tkinter)
 <br>
 Once you have the ortools created and swapped the pywraplp file for the modified version, you can download and compile the Tkinter module by `sudo apt-get install` for linux or use `homebrew` for mac os x.
 
