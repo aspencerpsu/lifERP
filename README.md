@@ -60,7 +60,7 @@ For other Linux distro's visit [google optimization tools][4] to import and conf
        $ make Makefile
 <br>
 <br>
-<h2 style="color: rgba(255,0,0);">Warning</h2>
+<div style="color: rgba(255,0,0,1);">Warning</div>
 <br>
 <br>
 If your machine build is based Unix Architecture (e.g. Apple Computer), you may have to replace the Tkinter imports to an all-lower cap text (e.g. tkinter)
