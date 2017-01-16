@@ -92,5 +92,5 @@ Use the code wisely and happy sharing!
   [2]: https://github.com/google/or-tools/releases/download/v5.0/or-tools_Ubuntu-16.04-64bit_v5.0.3919.tar.gz
   [3]: https://raw.githubusercontent.com/aspencerpsu/Tkinter/master/pywraplp.py
   [4]: https://developers.google.com/optimization/installing#installing-from-source-on-windows
-  [5]: https://raw.githubusercontent.com/aspencerpsu/Tkinter/master/simplex_gui.JPG
-  [6]: https://raw.githubusercontent.com/aspencerpsu/Tkinter/master/slack_input.JPG
+  [5]: https://github.com/aspencerpsu/lifERP/blob/master/simplex_incorrect_gui.jpg?raw=true
+  [6]: https://github.com/aspencerpsu/lifERP/blob/master/correct_gui_slack.jpg?raw=true
