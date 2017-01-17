@@ -3,4 +3,5 @@ transportation_class.py
 balanced_workload.py
 min_cost_flow_ex.py
 google_*.py
+lingo_*.py
 .*.swp
