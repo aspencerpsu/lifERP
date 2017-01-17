@@ -1,6 +1,6 @@
 # USE CASE REQUIREMENTS & METHODOLOGY
 --------
-The current project deliverables requires the user to have the ability to
+The current project deliverables requires the user to have the ability to:
 <br>
  - Input data, variables and nodes for the neural net, via drag and drop or through the ODBC click
  - The option to specify the networking logic that should be inherited within the system
@@ -15,6 +15,7 @@ Upon completion of the network model and structure, it's intrinsic for the user 
 generate the model and the data characteristics of the set he or she is trying to solve.
 <br>
 <br>
+
 ### Database Requirements
 ------
 - Machines can be 64 bit or 32 bit (Preferably MACOSX or Linux Distros)
@@ -23,7 +24,7 @@ generate the model and the data characteristics of the set he or she is trying t
   IF the user decides to do a 'data dump' on the canvas
 
 ### Languages
-------
+
 The stack should adhere to C, C++, Python respectively.
 
 ### Build
@@ -31,7 +32,7 @@ The stack should adhere to C, C++, Python respectively.
 The setup architecture should have a finalized setup.py structure to build and the filepath must conform to the 'root' user's bin
 (e.g. /usr/bin/lifERP.exe). The client should have access to the source application through the mercurial pypi build path, utilizing the pip2.exe command on win or unix applications. (MUST COMPILE!)
 
-## ROUGH SKETCH
+### ROUGH SKETCH
 ------
 This a layout I'm considering:
 
