@@ -1,11 +1,12 @@
 # USE CASE REQUIREMENTS & METHODOLOGY
 --------
-The current project deliverables requires the user to have the ability t
+The current project deliverables requires the user to have the ability to
+<br>
  - Input data, variables and nodes for the neural net, via drag and drop or through the ODBC click
  - The option to specify the networking logic that should be inherited within the system
  - The ability to perform back-propagation and genetic algorithm test cases depending on the model
  - Revert to linear assignments or transportation assignments through the menu
- - Create the model through fields on simplex problems
+ - Create the model through fields on simplex problems as an option (Dynamic Otherwise)
  - Click event to sync the data stream through their respective database to create a 'behind-the-scenes' analysis if one 
    problem methods doesn't achieve the expected results.
 <br>
