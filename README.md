@@ -1,7 +1,8 @@
 ![LifeERP][1]
-
-#LifERP
 ----------
+# LifERP
+> _When life gives you constraints, make an ERP system_
+
 ### MultiLP solutions guide for users of all businesses
 
 The following problems ** cannot ** be solved with this gui:
