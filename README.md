@@ -54,7 +54,7 @@ For other Linux distro's visit [google optimization tools][4] to import and conf
 
 [1/24/2017]: Add AutoScroll Class to Tkinter package:
 
-For the UI to function and scale correctly, add the autoscroll class in the `Tkinter.py` file:
+For the UI to function and scale correctly, add the `autoscroll` class in the `Tkinter.py` file:
 
     class AutoScrollbar(Scrollbar):
     # a scrollbar that hides itself if it's not needed.  only
