@@ -123,7 +123,7 @@ class ProblemStatement(object):
 			elif  op== '>':
 				cons[str(label)] = solver.Add(sum([coefficients[x]*variables[x] for x in range(0,len(coefficients))]) > int(boundary), label) 
 			elif op == '=':
-				cons[str(label)] = solver.Add(sum([coefficients[x]*variables[x] for x in range(0,len(coefficients)]) == int(boundary), label)
+				cons[str(label)] = solver.Add(sum([coefficients[x]*variables[x] for x in range(0,len(coefficients))]) == int(boundary), label)
 			else: raise SyntaxError("""Operator must be of type '=', \'>\', \'<', \'<=\', or \'>=\' symbols""")
 
 		print (vars.values(), cons.values())
